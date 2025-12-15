@@ -1,1 +1,0 @@
-# Github-theme-for-obsidean
