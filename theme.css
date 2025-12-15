@@ -1,0 +1,1254 @@
+/* =========================================================
+   Tito-GitNord — Dark (Panels #1f2428 / Editor #24292e)
+   Tags #9184e9, headings GitHub-ish, Outline hover/active exactos
+   ========================================================= */
+
+/* -------------------------
+   Base tokens / palette
+   ------------------------- */
+:root {
+  /* Backgrounds (exactos del usuario) */
+  --tito-panel-bg:  #1f2428; /* left/right panels */
+  --tito-editor-bg: #24292e; /* editor center */
+
+  /* Surfaces / borders */
+  --tito-surface-1: #2b3137; /* cards/popovers-ish */
+  --tito-surface-2: #2d333b; /* slightly different surface */
+  --tito-border:    #444c56; /* github-ish border */
+  --tito-border-2:  #3a4048;
+
+  /* Text */
+  --tito-text:      #adbac7; /* comfortable on github dark */
+  --tito-muted:     #8b949e;
+  --tito-faint:     #768390;
+
+  /* Accents (tu paleta) */
+  --tito-blue:   #76aee4;
+  --tito-violet: #9184e9; /* AMOR */
+  --tito-pink:   #f37480;
+  --tito-amber:  #ebab6b;
+
+  /* Outline exactos */
+  --tito-outline-hover:  #b65d5e;
+  --tito-outline-active: #546f97;
+
+  /* Selection */
+  --tito-selection-bg: rgba(145, 132, 233, 0.25);
+
+  /* Code */
+  --tito-code-bg: #1f2428;
+  --tito-code-text: #cdd9e5;
+}
+
+/* -------------------------
+   Obsidian theme variables
+   ------------------------- */
+.theme-dark {
+  /* Core backgrounds */
+  --background-primary: var(--tito-editor-bg);
+  --background-primary-alt: var(--tito-editor-bg);
+
+  --background-secondary: var(--tito-panel-bg);
+  --background-secondary-alt: var(--tito-panel-bg);
+
+  /* Modifiers */
+  --background-modifier-border: var(--tito-border);
+  --background-modifier-border-hover: var(--tito-border-2);
+  --background-modifier-form-field: var(--tito-surface-1);
+  --background-modifier-form-field-highlighted: var(--tito-surface-2);
+  --background-modifier-hover: rgba(173, 186, 199, 0.06);
+  --background-modifier-active-hover: rgba(173, 186, 199, 0.10);
+  --background-modifier-selection: var(--tito-selection-bg);
+
+  /* Text */
+  --text-normal: var(--tito-text);
+  --text-muted: var(--tito-muted);
+  --text-faint: var(--tito-faint);
+  --text-on-accent: #0b0f14;
+
+  /* Accent */
+  --interactive-accent: var(--tito-violet);
+  --interactive-accent-hover: var(--tito-blue);
+  --text-accent: var(--tito-violet);
+  --text-accent-hover: var(--tito-blue);
+
+  /* Headings */
+  --h1-color: var(--tito-blue);
+  --h2-color: var(--tito-violet);
+  --h3-color: var(--tito-pink);
+  --h4-color: var(--tito-amber);
+  --h5-color: var(--tito-blue);
+  --h6-color: var(--tito-violet);
+
+  /* Title */
+  --inline-title-color: var(--tito-violet);
+
+  /* Links */
+  --link-color: var(--tito-blue);
+  --link-color-hover: var(--tito-violet);
+  --link-external-color: var(--tito-blue);
+  --link-external-color-hover: var(--tito-violet);
+
+  /* Tags */
+  --tag-color: var(--tito-violet);
+  --tag-color-hover: var(--tito-blue);
+  --tag-background: rgba(145, 132, 233, 0.12);
+  --tag-background-hover: rgba(118, 174, 228, 0.14);
+  --tag-border-color: rgba(145, 132, 233, 0.35);
+  --tag-border-color-hover: rgba(118, 174, 228, 0.45);
+
+  /* Code */
+  --code-normal: var(--tito-code-text);
+  --code-background: var(--tito-code-bg);
+
+  /* Blockquotes */
+  --blockquote-border-color: var(--tito-border);
+  --blockquote-background-color: rgba(173, 186, 199, 0.04);
+}
+
+/* -------------------------
+   Layout: force panel/editor colors
+   ------------------------- */
+.theme-dark .workspace,
+.theme-dark .workspace-split,
+.theme-dark .workspace-tabs,
+.theme-dark .workspace-tab-container,
+.theme-dark .workspace-leaf,
+.theme-dark .workspace-leaf-content {
+  background-color: var(--background-secondary);
+}
+
+.theme-dark .workspace-leaf-content[data-type="markdown"] {
+  background-color: var(--background-primary);
+}
+
+/* Left ribbon + sidebars */
+.theme-dark .workspace-ribbon,
+.theme-dark .workspace-ribbon.mod-left,
+.theme-dark .workspace-ribbon.mod-right,
+.theme-dark .workspace-split.mod-left-split,
+.theme-dark .workspace-split.mod-right-split,
+.theme-dark .workspace-leaf-content:not([data-type="markdown"]) {
+  background-color: var(--background-secondary);
+}
+
+/* Editor frame */
+.theme-dark .markdown-source-view,
+.theme-dark .markdown-preview-view,
+.theme-dark .cm-editor,
+.theme-dark .cm-scroller {
+  background-color: var(--background-primary);
+}
+
+/* Tabs */
+.theme-dark .workspace-tab-header-container {
+  background-color: var(--background-secondary);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+
+.theme-dark .workspace-tab-header {
+  background-color: transparent;
+  color: var(--text-muted);
+}
+
+.theme-dark .workspace-tab-header.is-active {
+  color: var(--text-normal);
+}
+
+.theme-dark .workspace-tab-header.is-active .workspace-tab-header-inner {
+  border-bottom: 2px solid var(--interactive-accent);
+}
+
+/* Split borders */
+.theme-dark .workspace-split.mod-horizontal > * > .workspace-leaf-resize-handle,
+.theme-dark .workspace-split.mod-vertical > * > .workspace-leaf-resize-handle,
+.theme-dark .workspace-split.mod-horizontal > * > .workspace-leaf-resize-handle:hover,
+.theme-dark .workspace-split.mod-vertical > * > .workspace-leaf-resize-handle:hover {
+  background-color: var(--background-modifier-border);
+}
+
+/* -------------------------
+   Typography & headings
+   ------------------------- */
+.theme-dark .markdown-preview-view h1,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-1 { color: var(--h1-color) !important; }
+
+.theme-dark .markdown-preview-view h2,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-2 { color: var(--h2-color) !important; }
+
+.theme-dark .markdown-preview-view h3,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-3 { color: var(--h3-color) !important; }
+
+.theme-dark .markdown-preview-view h4,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-4 { color: var(--h4-color) !important; }
+
+.theme-dark .markdown-preview-view h5,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-5 { color: var(--h5-color) !important; }
+
+.theme-dark .markdown-preview-view h6,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-6 { color: var(--h6-color) !important; }
+
+/* Title of note */
+.theme-dark .inline-title {
+  color: var(--inline-title-color) !important;
+}
+
+/* -------------------------
+   Tags (#tag) exacto violeta
+   ------------------------- */
+.theme-dark a.tag,
+.theme-dark .cm-hashtag { /* live preview token */
+  color: var(--tag-color) !important;
+}
+
+.theme-dark a.tag {
+  background: var(--tag-background) !important;
+  border: 1px solid var(--tag-border-color) !important;
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-decoration: none !important;
+}
+
+.theme-dark a.tag:hover {
+  color: var(--tag-color-hover) !important;
+  background: var(--tag-background-hover) !important;
+  border-color: var(--tag-border-color-hover) !important;
+}
+
+/* -------------------------
+   Links
+   ------------------------- */
+.theme-dark .markdown-preview-view a,
+.theme-dark .cm-link,
+.theme-dark .cm-url {
+  color: var(--link-color) !important;
+}
+.theme-dark .markdown-preview-view a:hover,
+.theme-dark .cm-link:hover,
+.theme-dark .cm-url:hover {
+  color: var(--link-color-hover) !important;
+}
+
+/* -------------------------
+   Selection
+   ------------------------- */
+.theme-dark ::selection {
+  background: var(--background-modifier-selection);
+}
+
+/* -------------------------
+   Inputs / search / modals
+   ------------------------- */
+.theme-dark input[type="text"],
+.theme-dark input[type="search"],
+.theme-dark textarea,
+.theme-dark .search-input-container input,
+.theme-dark .prompt-input {
+  background: var(--background-modifier-form-field) !important;
+  color: var(--text-normal) !important;
+  border: 1px solid var(--background-modifier-border) !important;
+}
+
+.theme-dark .modal,
+.theme-dark .prompt,
+.theme-dark .suggestion-container,
+.theme-dark .popover {
+  background: var(--tito-surface-2) !important;
+  border: 1px solid var(--background-modifier-border) !important;
+}
+
+/* -------------------------
+   Code blocks
+   ------------------------- */
+.theme-dark pre,
+.theme-dark code {
+  background: var(--code-background) !important;
+  color: var(--code-normal) !important;
+  border: 1px solid rgba(68, 76, 86, 0.55);
+}
+
+.theme-dark .markdown-preview-view pre {
+  padding: 12px;
+  border-radius: 10px;
+}
+
+/* -------------------------
+   Outline (tus colores exactos)
+   ------------------------- */
+.theme-dark .workspace-leaf-content[data-type="outline"] .tree-item-self.is-clickable:hover {
+  color: var(--tito-outline-hover) !important;
+}
+
+.theme-dark .workspace-leaf-content[data-type="outline"] .tree-item-self.is-clickable.is-active,
+.theme-dark .workspace-leaf-content[data-type="outline"] .tree-item-self.is-clickable.is-selected {
+  color: var(--tito-outline-active) !important;
+}
+
+/* -------------------------
+   File explorer / nav hover consistency
+   ------------------------- */
+.theme-dark .nav-file-title,
+.theme-dark .nav-folder-title {
+  color: var(--text-normal);
+}
+
+.theme-dark .nav-file-title.is-active,
+.theme-dark .nav-folder-title.is-active {
+  color: var(--tito-outline-active) !important;
+}
+
+.theme-dark .nav-file-title:hover,
+.theme-dark .nav-folder-title:hover {
+  color: var(--tito-outline-hover) !important;
+}
+
+/* -------------------------
+   Lists / bullets subtle
+   ------------------------- */
+.theme-dark .markdown-preview-view ul > li::marker,
+.theme-dark .markdown-preview-view ol > li::marker {
+  color: var(--text-faint);
+}
+
+/* -------------------------
+   Callouts / blockquotes (sobrios)
+   ------------------------- */
+.theme-dark .callout {
+  background: rgba(173, 186, 199, 0.04);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 12px;
+}
+
+.theme-dark blockquote {
+  border-left: 3px solid var(--blockquote-border-color);
+  background: var(--blockquote-background-color);
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+/* -------------------------
+   Buttons
+   ------------------------- */
+.theme-dark button,
+.theme-dark .mod-cta {
+  background: rgba(145, 132, 233, 0.14);
+  border: 1px solid rgba(145, 132, 233, 0.35);
+  color: var(--text-normal);
+}
+.theme-dark button:hover,
+.theme-dark .mod-cta:hover {
+  background: rgba(118, 174, 228, 0.16);
+  border-color: rgba(118, 174, 228, 0.45);
+}
+
+/* -------------------------
+   Scrollbar (sutil)
+   ------------------------- */
+.theme-dark ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.theme-dark ::-webkit-scrollbar-thumb {
+  background: rgba(173, 186, 199, 0.18);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.theme-dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(173, 186, 199, 0.26);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* End */
+
+/* =========================
+   PATCH v0.1.1 — Tags + Sidebars + “brillo”
+   ========================= */
+
+/* 1) TAGS en amarillo (encaja y destaca sin pelear con headings) */
+.theme-dark {
+  --tag-color: #ebab6b;
+  --tag-color-hover: #f37480; /* opcional: hover en rojo suave */
+  --tag-background: rgba(235, 171, 107, 0.14);
+  --tag-background-hover: rgba(243, 116, 128, 0.14);
+  --tag-border-color: rgba(235, 171, 107, 0.40);
+  --tag-border-color-hover: rgba(243, 116, 128, 0.45);
+}
+
+.theme-dark a.tag,
+.theme-dark .cm-hashtag {
+  color: var(--tag-color) !important;
+}
+
+.theme-dark a.tag:hover {
+  color: var(--tag-color-hover) !important;
+}
+
+
+/* 2) Forzar fondos por tipo de panel (evita que Outline herede el editor) */
+
+/* Paneles laterales (file-explorer, outline, backlinks, search, etc.) */
+.theme-dark .workspace-leaf-content[data-type="file-explorer"],
+.theme-dark .workspace-leaf-content[data-type="outline"],
+.theme-dark .workspace-leaf-content[data-type="backlink"],
+.theme-dark .workspace-leaf-content[data-type="search"],
+.theme-dark .workspace-leaf-content[data-type="tag"],
+.theme-dark .workspace-leaf-content[data-type="bookmarks"],
+.theme-dark .workspace-leaf-content[data-type="graph"] {
+  background-color: var(--tito-panel-bg) !important;
+}
+
+/* Solo el markdown (editor/preview) usa el fondo claro */
+.theme-dark .workspace-leaf-content[data-type="markdown"],
+.theme-dark .markdown-source-view,
+.theme-dark .markdown-preview-view,
+.theme-dark .cm-editor,
+.theme-dark .cm-scroller {
+  background-color: var(--tito-editor-bg) !important;
+}
+
+/* 3) Más “brillo” percibido: subir contraste de texto */
+.theme-dark {
+  --text-normal: #cdd9e5; /* antes estaba más apagado */
+  --text-muted:  #a1acb8;
+  --text-faint:  #8b949e;
+}
+
+/* =========================
+   FIX: Outline sidebar background = panel bg
+   ========================= */
+
+/* Contenedor del panel Outline */
+.theme-dark .workspace-leaf-content[data-type="outline"],
+.theme-dark .workspace-leaf-content[data-type="outline"] .view-content,
+.theme-dark .workspace-leaf-content[data-type="outline"] .outline {
+  background-color: var(--tito-panel-bg) !important;
+}
+
+/* Si el Outline está en un “stack” con estilos raros, esto también lo cubre */
+.theme-dark .workspace-split.mod-right-split .workspace-leaf-content[data-type="outline"],
+.theme-dark .workspace-split.mod-right-split .workspace-leaf-content[data-type="outline"] .view-content {
+  background-color: var(--tito-panel-bg) !important;
+}
+
+/* =========================
+   Spellcheck (palabras mal escritas) — menos saturado
+   ========================= */
+
+:root {
+  --tito-spell: rgba(243, 116, 128, 0.75); /* rojo suave, elegante */
+}
+
+/* CM6 (editor) */
+.theme-dark .cm-spell-error,
+.theme-dark .cm-spell-error * {
+  text-decoration-color: var(--tito-spell) !important;
+  text-decoration-thickness: 2px;
+  text-decoration-style: wavy;
+}
+
+/* Algunas builds usan este token/class */
+.theme-dark .cm-misspelled,
+.theme-dark .cm-misspelled * {
+  text-decoration-color: var(--tito-spell) !important;
+  text-decoration-thickness: 2px;
+  text-decoration-style: wavy;
+}
+
+/* =========================
+   Sidebars text brightness (Outline/File explorer/etc.)
+   ========================= */
+
+:root {
+  --tito-sidebar-text: #cdd9e5;  /* más luz */
+  --tito-sidebar-muted: #aab6c2; /* secundarios */
+}
+
+/* Texto general en paneles no-markdown */
+.theme-dark .workspace-leaf-content:not([data-type="markdown"]) {
+  color: var(--tito-sidebar-text) !important;
+}
+
+/* Outline: items y headers */
+.theme-dark .workspace-leaf-content[data-type="outline"] .tree-item-self,
+.theme-dark .workspace-leaf-content[data-type="outline"] .tree-item-inner,
+.theme-dark .workspace-leaf-content[data-type="outline"] .view-header-title,
+.theme-dark .workspace-leaf-content[data-type="outline"] .view-header {
+  color: var(--tito-sidebar-text) !important;
+}
+
+/* Atenuados dentro de sidebars */
+.theme-dark .workspace-leaf-content:not([data-type="markdown"]) .is-muted,
+.theme-dark .workspace-leaf-content:not([data-type="markdown"]) .setting-item-description {
+  color: var(--tito-sidebar-muted) !important;
+}
+
+/* =========================
+   A) OUTLINE: hover + active (restaurar rojo/azul)
+   ========================= */
+
+.theme-dark .workspace-leaf-content[data-type="outline"] .tree-item-self.is-clickable:hover {
+  color: #b65d5e !important; /* tu rojito */
+  background-color: rgba(182, 93, 94, 0.10) !important;
+}
+
+.theme-dark .workspace-leaf-content[data-type="outline"] .tree-item-self.is-clickable.is-active,
+.theme-dark .workspace-leaf-content[data-type="outline"] .tree-item-self.is-clickable.is-selected {
+  color: #546f97 !important; /* tu azulito */
+  background-color: rgba(84, 111, 151, 0.16) !important;
+}
+
+/* =========================
+   B) SPELLCHECK: subrayado NO rojo — ámbar elegante
+   ========================= */
+
+:root {
+  --tito-spell: rgba(235, 171, 107, 0.85); /* #ebab6b, pero suave */
+}
+
+/* CM6: clases más comunes */
+.theme-dark .cm-spell-error,
+.theme-dark .cm-misspelled,
+.theme-dark .cm-spell-error *,
+.theme-dark .cm-misspelled * {
+  text-decoration-color: var(--tito-spell) !important;
+  -webkit-text-decoration-color: var(--tito-spell) !important;
+  text-decoration-thickness: 2px !important;
+  text-decoration-style: wavy !important;
+}
+
+/* “Diagnósticos”/linting (algunas builds/plugins lo usan) */
+.theme-dark .cm-diagnosticError,
+.theme-dark .cm-lintRange-error,
+.theme-dark .cm-lintRangeError {
+  border-bottom: 2px wavy var(--tito-spell) !important;
+}
+
+/* =========================
+   C) FILE EXPLORER: hover bonito + active sobrio
+   ========================= */
+
+/* Hover (antes rojizo feo): ámbar elegante */
+.theme-dark .nav-file-title:hover,
+.theme-dark .nav-folder-title:hover {
+  color: rgba(235, 171, 107, 0.95) !important; /* ámbar */
+  background-color: rgba(235, 171, 107, 0.10) !important;
+}
+
+/* Activo/seleccionado: azulito sobrio (tu vibe) */
+.theme-dark .nav-file-title.is-active,
+.theme-dark .nav-folder-title.is-active {
+  color: #cdd9e5 !important;
+  background-color: rgba(84, 111, 151, 0.18) !important;
+  border-left: 2px solid rgba(84, 111, 151, 0.55);
+}
+
+/* =====================================================
+   OUTLINE FINAL — simétrico con File Explorer
+   ===================================================== */
+
+/* HOVER: amarillo elegante (igual en ambos paneles) */
+.theme-dark .workspace-leaf-content[data-type="outline"] .tree-item-self.is-clickable:hover {
+  color: #ebab6b !important;
+  background-color: rgba(235, 171, 107, 0.14) !important;
+}
+
+/* ACTIVE / SELECTED: azulito más vivo (leve pero claro) */
+.theme-dark .workspace-leaf-content[data-type="outline"] .tree-item-self.is-clickable.is-active,
+.theme-dark .workspace-leaf-content[data-type="outline"] .tree-item-self.is-clickable.is-selected {
+  color: #6fa3d9 !important; /* azul más luminoso */
+  background-color: rgba(111, 163, 217, 0.20) !important;
+  border-left: 2px solid rgba(111, 163, 217, 0.55);
+}
+
+
+/* =====================================================
+   LUMINANCE PATCH — violeta y headings con más “luz”
+   ===================================================== */
+
+/* Violeta principal más luminoso (misma identidad) */
+:root {
+  --tito-violet-bright: #a89cff; /* +luz, +aire */
+  --tito-blue-bright:   #8bbcf0; /* headers grandes respiran más */
+}
+
+/* ---------- TÍTULO DE LA NOTA ---------- */
+.theme-dark .inline-title {
+  color: var(--tito-violet-bright) !important;
+
+  /* micro glow elegante (no neón) */
+  text-shadow: 0 0 6px rgba(168, 156, 255, 0.25);
+}
+
+/* ---------- HEADERS (editor + preview) ---------- */
+
+/* H1 */
+.theme-dark .markdown-preview-view h1,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-1 {
+  color: var(--tito-blue-bright) !important;
+}
+
+/* H2 */
+.theme-dark .markdown-preview-view h2,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-2 {
+  color: var(--tito-violet-bright) !important;
+}
+
+/* H3 */
+.theme-dark .markdown-preview-view h3,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-3 {
+  color: #f58a94 !important; /* leve lift del rosado */
+}
+
+/* H4 */
+.theme-dark .markdown-preview-view h4,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-4 {
+  color: #f0c27b !important; /* ámbar con más presencia */
+}
+
+/* =====================================================
+   PATCH: título más sobrio + H5/H6 con más luz + tag brillo leve
+   ===================================================== */
+
+/* 1) TÍTULO: violeta sobrio (no satura) */
+:root {
+  --tito-title: #9b92d8; /* violeta suavizado, armonioso */
+}
+
+/* Quita el glow fuerte y deja uno casi imperceptible */
+.theme-dark .inline-title {
+  color: var(--tito-title) !important;
+  text-shadow: 0 0 4px rgba(155, 146, 216, 0.14); /* muy leve */
+}
+
+/* 2) HEADERS: subir luz a H5/H6 (y mantener coherencia) */
+.theme-dark .markdown-preview-view h5,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-5 {
+  color: #8bbcf0 !important; /* blue-bright */
+}
+
+.theme-dark .markdown-preview-view h6,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-6 {
+  color: #a89cff !important; /* violet-bright */
+}
+
+/* (Opcional pero recomendable) que los hashes ###### no se vean “muertos” */
+.theme-dark .markdown-source-view.mod-cm6 .cm-formatting-header {
+  color: rgba(205, 217, 229, 0.55) !important;
+}
+
+/* =====================================================
+   File Explorer (panel izquierdo): mismo “active indicator”
+   que Outline (azulito + fondo)
+   ===================================================== */
+
+/* Variables (reusa el azul vivo que ya estamos usando en Outline) */
+:root{
+  --tito-active-blue: #6fa3d9;
+  --tito-active-blue-bg: rgba(111, 163, 217, 0.20);
+  --tito-active-blue-border: rgba(111, 163, 217, 0.55);
+}
+
+/* 1) Archivo activo: azulito vivo + barrita izquierda */
+.theme-dark .nav-file-title.is-active {
+  color: #cdd9e5 !important;
+  background-color: var(--tito-active-blue-bg) !important;
+  border-left: 2px solid var(--tito-active-blue-border) !important;
+  padding-left: 10px; /* para que la barrita no “choque” con el texto */
+}
+
+/* 2) Carpeta activa (si aplica): mismo comportamiento */
+.theme-dark .nav-folder-title.is-active {
+  color: #cdd9e5 !important;
+  background-color: var(--tito-active-blue-bg) !important;
+  border-left: 2px solid var(--tito-active-blue-border) !important;
+  padding-left: 10px;
+}
+
+/* 3) Hover: mantenemos tu amarillo elegante (y le damos fondo como Outline) */
+.theme-dark .nav-file-title:hover,
+.theme-dark .nav-folder-title:hover {
+  color: #ebab6b !important;
+  background-color: rgba(235, 171, 107, 0.14) !important;
+}
+
+/* 4) Si Obsidian marca “selected” distinto en algunas versiones */
+.theme-dark .nav-file-title.is-selected,
+.theme-dark .nav-folder-title.is-selected {
+  background-color: var(--tito-active-blue-bg) !important;
+  border-left: 2px solid var(--tito-active-blue-border) !important;
+  padding-left: 10px;
+}
+
+/* =====================================================
+   File Explorer — Folder ACTIVE (distinto de hover)
+   ===================================================== */
+
+/* Folder activo (click): azul contextual, no hover */
+.theme-dark .nav-folder-title.is-active {
+  color: #b6c9e6 !important; /* azul grisáceo elegante */
+  background-color: rgba(111, 163, 217, 0.10) !important;
+  border-left: 2px solid rgba(111, 163, 217, 0.35) !important;
+  padding-left: 10px;
+}
+
+/* Refuerza cuando Obsidian marca selected */
+.theme-dark .nav-folder-title.is-selected {
+  color: #b6c9e6 !important;
+  background-color: rgba(111, 163, 217, 0.10) !important;
+  border-left: 2px solid rgba(111, 163, 217, 0.35) !important;
+  padding-left: 10px;
+}
+
+/* Mantener hover ámbar (NO se toca) */
+.theme-dark .nav-folder-title:hover {
+  color: #ebab6b !important;
+  background-color: rgba(235, 171, 107, 0.14) !important;
+}
+
+/* =====================================================
+   Folder highlight REAL: folder que contiene el archivo activo
+   (usa :has(), soportado por Chromium/Electron moderno)
+   ===================================================== */
+
+:root{
+  --tito-folder-active-text: #b6c9e6;
+  --tito-folder-active-bg: rgba(111,163,217,0.10);
+  --tito-folder-active-border: rgba(111,163,217,0.35);
+}
+
+/* 1) Folder padre del archivo activo */
+.theme-dark .nav-folder:has(.nav-file-title.is-active) > .nav-folder-title{
+  color: var(--tito-folder-active-text) !important;
+  background-color: var(--tito-folder-active-bg) !important;
+  border-left: 2px solid var(--tito-folder-active-border) !important;
+  padding-left: 10px;
+}
+
+/* 2) A veces el texto está dentro de -content */
+.theme-dark .nav-folder:has(.nav-file-title.is-active) > .nav-folder-title .nav-folder-title-content{
+  color: var(--tito-folder-active-text) !important;
+}
+
+/* 3) Mantener tu hover ámbar (para no confundir estados) */
+.theme-dark .nav-folder-title:hover{
+  color: #ebab6b !important;
+  background-color: rgba(235,171,107,0.14) !important;
+}
+
+/* =====================================================
+   FILE EXPLORER — jerarquía final correcta
+   Folder = claro | File activo = oscuro morado
+   ===================================================== */
+
+:root{
+  /* Folder (contexto) */
+  --tito-folder-bg: rgba(111,163,217,0.16);
+  --tito-folder-border: rgba(111,163,217,0.45);
+  --tito-folder-text: #cfe0f3;
+
+  /* File activo (foco) */
+  --tito-file-bg: rgba(143,131,232,0.18); /* morado apagado */
+  --tito-file-border: rgba(143,131,232,0.55);
+  --tito-file-text: #e3defc;
+}
+
+/* ---------- FOLDER ACTIVO (contexto claro) ---------- */
+.theme-dark
+.nav-folder:has(.nav-file-title.is-active)
+> .nav-folder-title{
+  background-color: var(--tito-folder-bg) !important;
+  border-left: 2px solid var(--tito-folder-border) !important;
+  color: var(--tito-folder-text) !important;
+  padding-left: 10px;
+}
+
+/* Texto interno del folder */
+.theme-dark
+.nav-folder:has(.nav-file-title.is-active)
+> .nav-folder-title .nav-folder-title-content{
+  color: var(--tito-folder-text) !important;
+}
+
+/* ---------- FILE ACTIVO (nota seleccionada, MÁS OSCURA) ---------- */
+.theme-dark .nav-file-title.is-active{
+  background-color: var(--tito-file-bg) !important;
+  border-left: 3px solid var(--tito-file-border) !important;
+  color: var(--tito-file-text) !important;
+  padding-left: 10px;
+}
+
+/* ---------- HOVER (se mantiene ámbar) ---------- */
+.theme-dark .nav-file-title:hover,
+.theme-dark .nav-folder-title:hover{
+  color: #ebab6b !important;
+  background-color: rgba(235,171,107,0.14) !important;
+}
+
+
+
+/* =====================================================
+   HEADERS REFINEMENT — menos colores, más armonía
+   ===================================================== */
+
+:root{
+  --tito-h1: #8bbcf0;   /* azul principal */
+  --tito-h2: #9b92d8;   /* morado sobrio */
+  --tito-hx: #78dca0;   /* verde armónico (H3–H5) */
+}
+
+/* H1 */
+.theme-dark .markdown-preview-view h1,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-1{
+  color: var(--tito-h1) !important;
+}
+
+/* H2 */
+.theme-dark .markdown-preview-view h2,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-2{
+  color: var(--tito-h2) !important;
+}
+
+/* H3 */
+.theme-dark .markdown-preview-view h3,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-3{
+  color: var(--tito-hx) !important;
+}
+
+/* H4 */
+.theme-dark .markdown-preview-view h4,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-4{
+  color: var(--tito-hx) !important;
+  opacity: 0.92;
+}
+
+/* H5 */
+.theme-dark .markdown-preview-view h5,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-5{
+  color: var(--tito-hx) !important;
+  opacity: 0.85;
+}
+
+/* H6 (muy discreto, casi texto) */
+.theme-dark .markdown-preview-view h6,
+.theme-dark .markdown-source-view.mod-cm6 .cm-header-6{
+  color: var(--text-muted) !important;
+}
+
+
+/* =========================================================
+   Tito-GitNord — Light
+   Panels: #f6f8fa | Editor: #ffffff
+   GitHub-light inspired, consistent with your Dark semantics
+   ========================================================= */
+
+/* =========================================================
+   1) TOKENS (LIGHT)
+   ========================================================= */
+.theme-light {
+  /* Core backgrounds */
+  --tito-panel-bg:  #f6f8fa; /* side panels */
+  --tito-editor-bg: #ffffff; /* editor */
+
+  /* Surfaces / borders */
+  --tito-surface-1: #ffffff;
+  --tito-surface-2: #ffffff;
+  --tito-border:    #d0d7de; /* GitHub light border */
+  --tito-border-2:  #c6cdd5;
+
+  /* Text */
+  --tito-text:  #1f2328;
+  --tito-muted: #57606a;
+  --tito-faint: #6e7781;
+
+  /* Accent palette (light-optimized) */
+  --tito-blue:   #0969da; /* GitHub blue */
+  --tito-violet: #6f5fd6; /* muted violet (premium, no neon) */
+  --tito-green:  #2da44e; /* GitHub green (readable on white) */
+  --tito-amber:  #b7791f; /* warm amber (hover/tags) */
+
+  /* Selection */
+  --tito-selection-bg: rgba(9, 105, 218, 0.16);
+
+  /* Code */
+  --tito-code-bg:   #f6f8fa;
+  --tito-code-text: #1f2328;
+
+  /* Outline states (same semantics as dark) */
+  --tito-outline-hover-text:  var(--tito-amber);
+  --tito-outline-hover-bg:    rgba(183, 121, 31, 0.14);
+
+  --tito-outline-active-text: #1f6feb;
+  --tito-outline-active-bg:   rgba(31, 111, 235, 0.12);
+  --tito-outline-active-bar:  rgba(31, 111, 235, 0.45);
+
+  /* File Explorer hierarchy */
+  /* Folder (context) = clearer */
+  --tito-folder-bg:     rgba(31, 111, 235, 0.10);
+  --tito-folder-border: rgba(31, 111, 235, 0.35);
+  --tito-folder-text:   #0b2f6b;
+
+  /* Active file (focus) = purple muted */
+  --tito-file-bg:     rgba(111, 95, 214, 0.14);
+  --tito-file-border: rgba(111, 95, 214, 0.45);
+  --tito-file-text:   #2b215e;
+
+  /* Tags */
+  --tito-tag-text:        var(--tito-amber);
+  --tito-tag-bg:          rgba(183, 121, 31, 0.12);
+  --tito-tag-border:      rgba(183, 121, 31, 0.35);
+  --tito-tag-text-shadow: 0 0 0 rgba(0,0,0,0); /* en light, sin glow */
+
+  /* Title */
+  --tito-title: #5d4fd0;
+  --tito-title-shadow: 0 0 0 rgba(0,0,0,0);
+
+  /* Links */
+  --tito-link:       #0969da;
+  --tito-link-hover: #6f5fd6;
+
+  /* Optional: CM6 spell underline (solo si Obsidian lo expone) */
+  --tito-spell: rgba(183, 121, 31, 0.85);
+}
+
+/* =========================================================
+   2) OBSIDIAN THEME VARIABLES (LIGHT)
+   ========================================================= */
+.theme-light {
+  /* Backgrounds */
+  --background-primary: var(--tito-editor-bg);
+  --background-primary-alt: var(--tito-editor-bg);
+
+  --background-secondary: var(--tito-panel-bg);
+  --background-secondary-alt: var(--tito-panel-bg);
+
+  /* Modifiers */
+  --background-modifier-border: var(--tito-border);
+  --background-modifier-border-hover: var(--tito-border-2);
+  --background-modifier-form-field: var(--tito-surface-1);
+  --background-modifier-form-field-highlighted: var(--tito-surface-2);
+  --background-modifier-hover: rgba(31, 35, 40, 0.05);
+  --background-modifier-active-hover: rgba(31, 35, 40, 0.08);
+  --background-modifier-selection: var(--tito-selection-bg);
+
+  /* Text */
+  --text-normal: var(--tito-text);
+  --text-muted: var(--tito-muted);
+  --text-faint: var(--tito-faint);
+  --text-on-accent: #ffffff;
+
+  /* Accent */
+  --interactive-accent: var(--tito-violet);
+  --interactive-accent-hover: var(--tito-link);
+  --text-accent: var(--tito-violet);
+  --text-accent-hover: var(--tito-link);
+
+  /* Headings (preview variables) */
+  --h1-color: var(--tito-blue);
+  --h2-color: var(--tito-violet);
+  --h3-color: var(--tito-green);
+  --h4-color: var(--tito-green);
+  --h5-color: var(--tito-green);
+  --h6-color: var(--text-muted);
+
+  /* Title */
+  --inline-title-color: var(--tito-title);
+
+  /* Links */
+  --link-color: var(--tito-link);
+  --link-color-hover: var(--tito-link-hover);
+  --link-external-color: var(--tito-link);
+  --link-external-color-hover: var(--tito-link-hover);
+
+  /* Tags */
+  --tag-color: var(--tito-tag-text);
+  --tag-background: var(--tito-tag-bg);
+  --tag-border-color: var(--tito-tag-border);
+
+  /* Code */
+  --code-normal: var(--tito-code-text);
+  --code-background: var(--tito-code-bg);
+
+  /* Blockquotes */
+  --blockquote-border-color: var(--tito-border);
+  --blockquote-background-color: rgba(31, 35, 40, 0.03);
+}
+
+/* =========================================================
+   3) LAYOUT: PANELS vs EDITOR (LIGHT)
+   ========================================================= */
+.theme-light .workspace,
+.theme-light .workspace-split,
+.theme-light .workspace-tabs,
+.theme-light .workspace-tab-container,
+.theme-light .workspace-leaf,
+.theme-light .workspace-leaf-content {
+  background-color: var(--background-secondary);
+}
+
+.theme-light .workspace-leaf-content:not([data-type="markdown"]) {
+  background-color: var(--background-secondary) !important;
+  color: var(--text-normal);
+}
+
+.theme-light .workspace-leaf-content[data-type="markdown"],
+.theme-light .markdown-source-view,
+.theme-light .markdown-preview-view,
+.theme-light .cm-editor,
+.theme-light .cm-scroller {
+  background-color: var(--background-primary) !important;
+}
+
+/* Tabs */
+.theme-light .workspace-tab-header-container {
+  background-color: var(--background-secondary);
+  border-bottom: 1px solid var(--background-modifier-border);
+}
+.theme-light .workspace-tab-header {
+  background-color: transparent;
+  color: var(--text-muted);
+}
+.theme-light .workspace-tab-header.is-active {
+  color: var(--text-normal);
+}
+.theme-light .workspace-tab-header.is-active .workspace-tab-header-inner {
+  border-bottom: 2px solid var(--interactive-accent);
+}
+
+/* Resize handles */
+.theme-light .workspace-split.mod-horizontal > * > .workspace-leaf-resize-handle,
+.theme-light .workspace-split.mod-vertical > * > .workspace-leaf-resize-handle,
+.theme-light .workspace-split.mod-horizontal > * > .workspace-leaf-resize-handle:hover,
+.theme-light .workspace-split.mod-vertical > * > .workspace-leaf-resize-handle:hover {
+  background-color: var(--background-modifier-border);
+}
+
+/* =========================================================
+   4) TYPOGRAPHY: TITLE + HEADERS (LIGHT)
+   ========================================================= */
+.theme-light .inline-title {
+  color: var(--inline-title-color) !important;
+  text-shadow: var(--tito-title-shadow);
+}
+
+.theme-light .markdown-preview-view h1,
+.theme-light .markdown-source-view.mod-cm6 .cm-header-1 { color: var(--h1-color) !important; }
+
+.theme-light .markdown-preview-view h2,
+.theme-light .markdown-source-view.mod-cm6 .cm-header-2 { color: var(--h2-color) !important; }
+
+.theme-light .markdown-preview-view h3,
+.theme-light .markdown-source-view.mod-cm6 .cm-header-3 { color: var(--h3-color) !important; }
+
+.theme-light .markdown-preview-view h4,
+.theme-light .markdown-source-view.mod-cm6 .cm-header-4 { color: var(--h4-color) !important; opacity: 0.92; }
+
+.theme-light .markdown-preview-view h5,
+.theme-light .markdown-source-view.mod-cm6 .cm-header-5 { color: var(--h5-color) !important; opacity: 0.88; }
+
+.theme-light .markdown-preview-view h6,
+.theme-light .markdown-source-view.mod-cm6 .cm-header-6 { color: var(--h6-color) !important; }
+
+/* Header markers ###### (subtle) */
+.theme-light .markdown-source-view.mod-cm6 .cm-formatting-header {
+  color: rgba(87, 96, 106, 0.55) !important;
+}
+
+/* =========================================================
+   5) TAGS (LIGHT)
+   ========================================================= */
+.theme-light a.tag,
+.theme-light .cm-hashtag {
+  color: var(--tag-color) !important;
+  text-shadow: var(--tito-tag-text-shadow);
+}
+
+.theme-light a.tag {
+  background: var(--tag-background) !important;
+  border: 1px solid var(--tag-border-color) !important;
+  padding: 2px 8px;
+  border-radius: 999px;
+  text-decoration: none !important;
+}
+
+.theme-light a.tag:hover {
+  color: #0b2f6b !important; /* hover más “serio” en light */
+  background: rgba(9, 105, 218, 0.10) !important;
+  border-color: rgba(9, 105, 218, 0.30) !important;
+}
+
+/* =========================================================
+   6) LINKS
+   ========================================================= */
+.theme-light .markdown-preview-view a,
+.theme-light .cm-link,
+.theme-light .cm-url {
+  color: var(--link-color) !important;
+}
+.theme-light .markdown-preview-view a:hover,
+.theme-light .cm-link:hover,
+.theme-light .cm-url:hover {
+  color: var(--link-color-hover) !important;
+}
+
+/* =========================================================
+   7) SELECTION
+   ========================================================= */
+.theme-light ::selection {
+  background: var(--background-modifier-selection);
+}
+
+/* =========================================================
+   8) INPUTS / MODALS / POPOVERS
+   ========================================================= */
+.theme-light input[type="text"],
+.theme-light input[type="search"],
+.theme-light textarea,
+.theme-light .search-input-container input,
+.theme-light .prompt-input {
+  background: #ffffff !important;
+  color: var(--text-normal) !important;
+  border: 1px solid var(--background-modifier-border) !important;
+}
+
+.theme-light .modal,
+.theme-light .prompt,
+.theme-light .suggestion-container,
+.theme-light .popover {
+  background: #ffffff !important;
+  border: 1px solid var(--background-modifier-border) !important;
+}
+
+/* =========================================================
+   9) CODE BLOCKS
+   ========================================================= */
+.theme-light pre,
+.theme-light code {
+  background: var(--code-background) !important;
+  color: var(--code-normal) !important;
+  border: 1px solid rgba(208, 215, 222, 0.85);
+}
+
+.theme-light .markdown-preview-view pre {
+  padding: 12px;
+  border-radius: 10px;
+}
+
+/* =========================================================
+   10) OUTLINE (LIGHT) — same semantics as dark
+   ========================================================= */
+.theme-light .workspace-leaf-content[data-type="outline"] .tree-item-self.is-clickable:hover {
+  color: var(--tito-outline-hover-text) !important;
+  background-color: var(--tito-outline-hover-bg) !important;
+}
+
+.theme-light .workspace-leaf-content[data-type="outline"] .tree-item-self.is-clickable.is-active,
+.theme-light .workspace-leaf-content[data-type="outline"] .tree-item-self.is-clickable.is-selected {
+  color: var(--tito-outline-active-text) !important;
+  background-color: var(--tito-outline-active-bg) !important;
+  border-left: 2px solid var(--tito-outline-active-bar);
+}
+
+/* =========================================================
+   11) FILE EXPLORER (LIGHT) — same hierarchy as dark
+   Folder (context) = clear | Active file (focus) = muted purple
+   ========================================================= */
+.theme-light .nav-file-title,
+.theme-light .nav-folder-title {
+  color: var(--text-normal);
+}
+
+/* Hover (exploration) */
+.theme-light .nav-file-title:hover,
+.theme-light .nav-folder-title:hover {
+  color: var(--tito-amber) !important;
+  background-color: rgba(183, 121, 31, 0.14) !important;
+}
+
+/* Folder highlight: parent folder of active file (requires :has) */
+.theme-light .nav-folder:has(.nav-file-title.is-active) > .nav-folder-title {
+  background-color: var(--tito-folder-bg) !important;
+  border-left: 2px solid var(--tito-folder-border) !important;
+  color: var(--tito-folder-text) !important;
+  padding-left: 10px;
+}
+
+.theme-light .nav-folder:has(.nav-file-title.is-active) > .nav-folder-title .nav-folder-title-content {
+  color: var(--tito-folder-text) !important;
+}
+
+/* Active file */
+.theme-light .nav-file-title.is-active {
+  background-color: var(--tito-file-bg) !important;
+  border-left: 3px solid var(--tito-file-border) !important;
+  color: var(--tito-file-text) !important;
+  padding-left: 10px;
+}
+
+/* =========================================================
+   12) LIST MARKERS / CALLOUTS / BLOCKQUOTE / BUTTONS
+   ========================================================= */
+.theme-light .markdown-preview-view ul > li::marker,
+.theme-light .markdown-preview-view ol > li::marker {
+  color: var(--text-faint);
+}
+
+.theme-light .callout {
+  background: rgba(31, 35, 40, 0.03);
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 12px;
+}
+
+.theme-light blockquote {
+  border-left: 3px solid var(--blockquote-border-color);
+  background: var(--blockquote-background-color);
+  padding: 8px 12px;
+  border-radius: 10px;
+}
+
+.theme-light button,
+.theme-light .mod-cta {
+  background: rgba(111, 95, 214, 0.10);
+  border: 1px solid rgba(111, 95, 214, 0.25);
+  color: var(--text-normal);
+}
+.theme-light button:hover,
+.theme-light .mod-cta:hover {
+  background: rgba(9, 105, 218, 0.10);
+  border-color: rgba(9, 105, 218, 0.25);
+}
+
+/* =========================================================
+   13) SCROLLBAR (LIGHT)
+   ========================================================= */
+.theme-light ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.theme-light ::-webkit-scrollbar-thumb {
+  background: rgba(87, 96, 106, 0.22);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.theme-light ::-webkit-scrollbar-thumb:hover {
+  background: rgba(87, 96, 106, 0.32);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* =========================================================
+   14) OPTIONAL: CM6 spell underline (only if available)
+   Note: system/Chromium spell red underline cannot be themed via CSS.
+   ========================================================= */
+.theme-light .cm-spell-error,
+.theme-light .cm-misspelled,
+.theme-light .cm-spell-error *,
+.theme-light .cm-misspelled * {
+  text-decoration-color: var(--tito-spell) !important;
+  -webkit-text-decoration-color: var(--tito-spell) !important;
+  text-decoration-thickness: 2px !important;
+  text-decoration-style: wavy !important;
+}
+
